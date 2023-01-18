@@ -1,6 +1,7 @@
 {
     "token": "token GH_TOKEN",
     "slsa": {
+	"debug": true,
         "repository": "scribe-security/guys-slsa-test",
         "protected_branch": "main",
         "accept_retained_indefinitely": true,
