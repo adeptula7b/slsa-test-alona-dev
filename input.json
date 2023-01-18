@@ -1,6 +1,7 @@
 {
     "token": "token GH_TOKEN",
     "slsa": {
+	"debug": true,
         "repository": "Scribe-Demo/slsa-test-alona-dev",
         "protected_branch": "main",
         "accept_retained_indefinitely": true,
