@@ -82,11 +82,11 @@ jobs:
           name: slsa_report
           path: slsa.json 
           
-      - name: Cache input.json
-        uses: actions/cache@v3
-        with:
-         path: ~/cache.txt
-         key: my-key
+#       - name: Cache input.json
+#         uses: actions/cache@v3
+#         with:
+#          path: ~/cache.txt
+#          key: my-key
           
  
        
