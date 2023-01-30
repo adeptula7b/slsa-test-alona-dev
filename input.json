@@ -1,7 +1,7 @@
 {
     "token": "token GH_TOKEN",
     "slsa": {
-        "repository": "scribe-security/guys-slsa-test",
+        "repository": "Scribe-Demo/slsa-test-alona-dev",
         "protected_branch": "main",
         "accept_retained_indefinitely": true,
         "repository_url": "https://github.com/scribe-security/guys-slsa-test",
