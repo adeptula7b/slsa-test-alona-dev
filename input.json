@@ -4,14 +4,14 @@
         "repository": "Scribe-Demo/slsa-test-alona-dev",
         "protected_branch": "main",
         "accept_retained_indefinitely": true,
-        "repository_url": "https://github.com/scribe-security/guys-slsa-test",
+        "repository_url": "https://github.com/Scribe-Demo/slsa-test-alona-dev",
         "build_script": "build.yml",
         "build_service": "GitHub Actions",
         "provenance": "a.prov",
         "reason_provenance_authenticated": "a.sig"
     },
     "commits": {
-        "scribe-security/guys-slsa-test": {
+        "Scribe-Demo/slsa-test-alona-dev": {
             "history": ["8eda247e57ca4202a814f5efb28d9e7a5de12cdf"]
         }
     }
