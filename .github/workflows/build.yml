@@ -114,19 +114,19 @@ jobs:
           ref: refs/tags/v1.0.0-alpha.4
           path: mongo-express-scm
 
-      - name: Scm generate bom, upload to scribe
-        id: valint_bom_scm
-        uses: scribe-security/action-bom@master
-        with:
-           type: dir
-           target: 'mongo-express-scm'
-           scribe-enable: true
-           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-           scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
-           scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
-           scribe-url: ${{ env.SCRIBE_URL }}
-           scribe-login-url: ${{ env.SCRIBE_LOGIN_URL }}
-           scribe-audience: ${{ env.SCRIBE_AUDIENCE }}
+#       - name: Scm generate bom, upload to scribe
+#         id: valint_bom_scm
+#         uses: scribe-security/action-bom@master
+#         with:
+#            type: dir
+#            target: 'mongo-express-scm'
+#            scribe-enable: true
+#            product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
+#            scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
+#            scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
+#            scribe-url: ${{ env.SCRIBE_URL }}
+#            scribe-login-url: ${{ env.SCRIBE_LOGIN_URL }}
+#            scribe-audience: ${{ env.SCRIBE_AUDIENCE }}
 
       # Build and push your image - this example skips this step as we're using the published mongo express.
 
@@ -135,7 +135,7 @@ jobs:
         uses: scribe-security/action-bom@master
         with:
           type: docker # To be included only if you want to to use docker daemon to access the image (for example, creating your docker image locally)
-          target: 'mongo-express:1.0.0-alpha.4'
+          target: eclipse/angular:latest
           scribe-enable: true
           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
           scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
