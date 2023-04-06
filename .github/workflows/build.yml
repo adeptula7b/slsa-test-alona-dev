@@ -168,7 +168,7 @@ jobs:
         with:
           type: docker
           target: 'date:latest'
-          format: statement-slsa
+#           format: statement-slsa
           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
 
       - uses: actions/upload-artifact@v2
