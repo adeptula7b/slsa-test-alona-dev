@@ -6,7 +6,7 @@ on:
     workflow_dispatch:
     
 env:
-     SCRIBE_URL: "https://airflow.dev.scribesecurity.com/scribe-proxy"
+     SCRIBE_URL: "https://airflow.dev.scribesecurity.com"
      SCRIBE_LOGIN_URL: "https://scribe-hub-dev.us.auth0.com"
      SCRIBE_AUDIENCE: "api.dev.scribesecurity.com"
 
@@ -57,7 +57,7 @@ jobs:
           target: date:latest
           scribe-enable: true
 #           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-          product-key: 00_new_slsa
+          product-key: adam_product
           scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
           scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
           scribe-url: ${{ env.SCRIBE_URL }}
