@@ -40,7 +40,7 @@ jobs:
            target: 'mongo-express-scm'
            scribe-enable: true
 #            product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-           product-key: AdamProduct
+           product-key: Adam-SH-2263
            scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
            scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
            scribe-url: ${{ env.SCRIBE_URL }}
@@ -83,7 +83,7 @@ jobs:
           target: 'date:latest'
 #           format: statement-slsa
 #           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-          product-key: AdamProduct
+          product-key: Adam-SH-2263
 
       - uses: actions/upload-artifact@v2
         with:
