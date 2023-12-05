@@ -9,6 +9,11 @@ env:
      SCRIBE_URL: "https://airflow.dev.scribesecurity.com"
      SCRIBE_LOGIN_URL: "https://scribe-hub-dev.us.auth0.com"
      SCRIBE_AUDIENCE: "api.dev.scribesecurity.com"
+     IMAGE_NAME: adam-image
+     IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || 'main' }}
+     PRODUCT_NAME: 'Adam_Product_2'
+     APP_NAME: adam-app
+     APP_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
 
 jobs:
   scribe-report-test:
@@ -32,61 +37,28 @@ jobs:
           ref: refs/tags/v1.0.0-alpha.4
           path: mongo-express-scm
 
-      - name: Scm generate bom, upload to scribe
-        id: valint_bom_scm
+      - name: Valint Git
         uses: scribe-security/action-bom@master
         with:
-           type: dir
-           target: 'mongo-express-scm'
-           scribe-enable: true
-#            product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-           product-key: Adam2-SH-2263
-           scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
-           scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
-           scribe-url: ${{ env.SCRIBE_URL }}
-           scribe-login-url: ${{ env.SCRIBE_LOGIN_URL }}
-           scribe-audience: ${{ env.SCRIBE_AUDIENCE }}
-
-      # Build and push your image - this example skips this step as we're using the published mongo express.
-
-      - name: Image generate bom, upload to scribe
-        id: valint_bom_image
-        uses: scribe-security/action-bom@master
-        with:
-          type: docker # To be included only if you want to to use docker daemon to access the image (for example, creating your docker image locally)
-          target: date:latest
+          target: git:.
+          format: attest
           scribe-enable: true
-#           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-          product-key: Adam2-SH-2263
+          product-key: $PRODUCT_NAME
           scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
           scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
-          scribe-url: ${{ env.SCRIBE_URL }}
-          scribe-login-url: ${{ env.SCRIBE_LOGIN_URL }}
-          scribe-audience: ${{ env.SCRIBE_AUDIENCE }}
+          app-name: $APP_NAME
+          app-version: $APP_VERSION
 
-      - uses: actions/upload-artifact@v2
+      - name: Valint Git Verify
+        uses: scribe-security/action-verify@master
         with:
-          name: scribe-reports
-          path: |
-            ${{ steps.valint_bom_scm.outputs.OUTPUT_PATH }}
-            ${{ steps.valint_bom_image.outputs.OUTPUT_PATH }}
-            
-             - uses: actions/checkout@v2
-              with:
-              fetch-depth: 0
+          target: git:.
+          format: attest
+          scribe-enable: true
+          product-key: $PRODUCT_NAME
+          scribe-client-id: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_ID }}
+          scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
+          app-name: $APP_NAME
+          app-version: $APP_VERSION
 
-      - name: Generate SLSA provenance statement
-        id: valint_slsa_statement
-        uses: scribe-security/action-bom@master
-        with:
-          type: docker
-          target: 'date:latest'
-#           format: statement-slsa
-#           product-key: ${{ secrets.SCRIBE_DEV_PRODUCT_KEY }}
-          product-key: Adam2-SH-2263
-
-      - uses: actions/upload-artifact@v2
-        with:
-           name: provenance
-           path: ${{ steps.valint_slsa_statement.outputs.OUTPUT_PATH }}
        
